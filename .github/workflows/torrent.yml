@@ -29,4 +29,4 @@ jobs:
         run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data
 
       - name: Copy file to Drive
-        run: "rclone sync /data zaindigithai:"
+        run: "rclone sync /data/ zaindigithai: --ignore-existing -P"
