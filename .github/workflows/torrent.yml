@@ -34,10 +34,19 @@ jobs:
         - name: LS
           run: cd /data && ls -la
           
+        - name: Current dir before
+          run: pwd
+          
         - name: rclone
           uses: wei/rclone@v1
           env:
             RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
           with:
             args: sync /data zaindigithai:/
+            
+        - name: Current dir after rclone
+          run: pwd
+          
+        - name: rclone file
+          run: cat ~/.config/rclone/rclone.conf
 
