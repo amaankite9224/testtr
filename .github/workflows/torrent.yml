@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-        - uses: actions/checkout@master
+
 
         - name: Maximize disk space
           if: inputs.maximize_disk_space
@@ -35,10 +35,11 @@ jobs:
           run: cd /data && ls -la
           
 
+        - uses: actions/checkout@master
         - name: rclone
           uses: wei/rclone@v1
           env:
             RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
           with:
-            args: sync /data zaindigithai:
+            args: sync /data zaindigithai:/
 
