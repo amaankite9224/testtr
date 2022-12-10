@@ -9,14 +9,13 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@master
+      - name: Maximize disk space
+        if: inputs.maximize_disk_space
+        uses: easimon/maximize-build-space@v6
         with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
-          remove-dotnet: 'true'
-      - name: Checkout
-        uses: actions/checkout@v2
+          remove-dotnet: true
+          remove-android: true
+          remove-haskell: true
 
       - name: Free Space
         run: df -h
