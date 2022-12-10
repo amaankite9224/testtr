@@ -23,7 +23,10 @@ jobs:
           run: |
               echo '${{ secrets.DOTENV }}' >> .env
           
-        - name: Dowload File
+        - name: Fixed permission
+          run: sudo chown $USER /data
+          
+        - name: Dowload FIle
           run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data  
       
         - name: LS
