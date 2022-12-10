@@ -15,7 +15,7 @@ jobs:
               echo '${{ secrets.DOTENV }}' >> .env
         
         - name: Install aria2
-          run: apt install -y transmission-cli 
+          run: sudo apt install -y transmission-cli 
           
         - name: Dowload File
           run: transmission-cli "${{ github.event.inputs.url }}" -w /data
