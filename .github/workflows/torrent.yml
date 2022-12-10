@@ -32,7 +32,7 @@ jobs:
             rclone_config: ${{ secrets.RCLONE_CONFIG }}
             
         - name: list rclone drive
-          run: 'rclone lsd zaindigithai:'
+          run: 'rclone config'
 
 #         - name: Dowload FIle
 #           run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data  
