@@ -41,10 +41,10 @@ jobs:
           run: sudo apt install -y bash curl unzip ca-certificates fuse openssh-client
           
         - name: Install rclone 
-          run: wget -qO- https://rclone.org/install.sh | bash
+          run: sudo wget -qO- https://rclone.org/install.sh | bash
             
         - name: make rclone config foler
-          run: mkdir ~/.config/rclone
+          run: sudo mkdir ~/.config/rclone
           
         - name: copy rclone config
           run: echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
