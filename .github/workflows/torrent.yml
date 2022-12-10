@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-        - name: current shell and user
-          run: echo $SHELL && whoami
+#         - name: current shell and user
+#           run: echo $SHELL && whoami
     
 #         - name: Maximize disk space
 #           if: inputs.maximize_disk_space
@@ -31,8 +31,8 @@ jobs:
           with:
             rclone_config: ${{ secrets.RCLONE_CONFIG }}
             
-        - name: Check rclone config file
-          run: cat ~/.config/rclone/rclone.conf
+        - name: list rclone drive
+          run: 'rclone lsd zaindigithai:'
 
 #         - name: Dowload FIle
 #           run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data  
