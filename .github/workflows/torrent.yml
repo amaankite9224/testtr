@@ -34,19 +34,21 @@ jobs:
         - name: LS
           run: cd /data && ls -la
           
-        - name: Current dir before
+        - name: Current dir
           run: pwd
           
-        - name: rclone
-          uses: wei/rclone@v1
-          env:
-            RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
-          with:
-            args: sync /data zaindigithai:/
+        - name: Install rclone dependicies 
+          run: sudo apt install -y bash curl unzip ca-certificates fuse openssh-client
+          
+        - name: Install rclone 
+          run: wget -qO- https://rclone.org/install.sh | bash
             
-        - name: Current dir after rclone
-          run: pwd
+        - name: make rclone config foler
+          run: mkdir ~/.config/rclone
           
-        - name: rclone file
+        - name: copy rclone config
+          run: echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
+          
+        - name: Check config file
           run: cat ~/.config/rclone/rclone.conf
 
