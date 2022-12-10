@@ -26,7 +26,7 @@ jobs:
               echo '${{ secrets.DOTENV }}' >> .env
           
         - name: Fixed permission
-          run: sudo chown $USER /data
+          run: sudo chown -R $USER /data
           
         - name: Dowload FIle
           run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data  
@@ -34,8 +34,6 @@ jobs:
         - name: LS
           run: cd /data && ls -la
           
-
-        - uses: actions/checkout@master
         - name: rclone
           uses: wei/rclone@v1
           env:
