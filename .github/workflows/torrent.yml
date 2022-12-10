@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-
-
         - name: Maximize disk space
           if: inputs.maximize_disk_space
           uses: easimon/maximize-build-space@v6
@@ -20,35 +18,22 @@ jobs:
             remove-android: true
             remove-haskell: true
         
-       
-        - name: Write .env File
-          run: |
-              echo '${{ secrets.DOTENV }}' >> .env
           
         - name: Fixed permission
           run: sudo chown -R $USER /data
           
+          
+        - name: Rclone setup
+          uses: AnimMouse/setup-rclone@v1
+          with:
+            rclone_config: ${{ secrets.RCLONE_CONFIG }}
+            
+        - name: Check rclone config file
+          run: cat ~/.config/rclone/rclone.conf
+
         - name: Dowload FIle
           run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data  
       
-        - name: LS
-          run: cd /data && ls -la
           
-        - name: Current dir
-          run: pwd
-          
-        - name: Install rclone dependicies 
-          run: sudo apt install -y bash curl unzip ca-certificates fuse openssh-client
-          
-        - name: Install rclone 
-          run: sudo wget -qO- https://rclone.org/install.sh | bash
-            
-        - name: make rclone config foler
-          run: sudo mkdir ~/.config/rclone
-          
-        - name: copy rclone config
-          run: echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
-          
-        - name: Check config file
-          run: cat ~/.config/rclone/rclone.conf
+
 
