@@ -9,19 +9,22 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
+
+        - name: Maximize disk space
+          if: inputs.maximize_disk_space
+          uses: easimon/maximize-build-space@v6
+          with:
+            remove-dotnet: true
+            remove-android: true
+            remove-haskell: true
+        
        
         - name: Write .env File
           run: |
               echo '${{ secrets.DOTENV }}' >> .env
-        
-        - name: Install aria2
-          run: sudo apt install -y transmission-cli 
           
         - name: Dowload File
-          run: transmission-cli "${{ github.event.inputs.url }}" -w /data
+          run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data  
       
         - name: LS
           run: cd /data && ls -la
-          
-        - name: Upload to Drive
-          run: node /app/upload.js
