@@ -32,4 +32,4 @@ jobs:
         run: npx webtorrent-cli "${{ github.event.inputs.url }}" -o /data
 
       - name: Copy file to Drive
-        run:  "rclone copy /data/ zaindigithai: --ignore-existing -P --checkers 32 --transfers 16 --retries 6  --low-level-retries 10 --fast-list --drive-chunk-size 512M --retries-sleep 2m"
+        run:  "rclone copy /data/ zaindigithai: --ignore-existing -P --checkers 32 --transfers 16 --retries 6  --low-level-retries 10 --fast-list --drive-chunk-size 512M --tpslimit 10 --retries-sleep 2m --drive-upload-cutoff 1000T --user-agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36'"
